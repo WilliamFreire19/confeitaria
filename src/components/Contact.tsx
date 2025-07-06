@@ -50,10 +50,10 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contato" className="py-16 bg-warm-50">
+    <section id="contato" className="py-16 bg-warm-50" aria-labelledby="contact-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
+          <h2 id="contact-heading" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
             Faça seu Pedido ou Venha nos Visitar
           </h2>
           <p className="text-lg text-primary-600 max-w-3xl mx-auto">
@@ -68,7 +68,8 @@ const Contact: React.FC = () => {
               Entre em Contato
             </h3>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" aria-labelledby="contact-form-heading">
+             <h4 id="contact-form-heading" className="sr-only">Formulário de Contato</h4>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-primary-700 mb-2">
                   Nome Completo
@@ -80,6 +81,7 @@ const Contact: React.FC = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
+                  autoComplete="name"
                   className="w-full px-4 py-3 border border-primary-200 rounded-xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-colors duration-200"
                   placeholder="Seu nome completo"
                 />
@@ -96,6 +98,7 @@ const Contact: React.FC = () => {
                   value={formData.contact}
                   onChange={handleInputChange}
                   required
+                  autoComplete="tel"
                   className="w-full px-4 py-3 border border-primary-200 rounded-xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-colors duration-200"
                   placeholder="Seu email ou telefone"
                 />
@@ -121,7 +124,7 @@ const Contact: React.FC = () => {
                 type="submit"
                 className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-4 px-6 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2 group"
               >
-                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                 Enviar Mensagem
               </button>
             </form>
@@ -134,13 +137,14 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Info and Map */}
-          <div className="space-y-8">
+          <aside className="space-y-8" aria-labelledby="contact-info-heading">
             {/* Contact Information */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+             <h3 id="contact-info-heading" className="sr-only">Informações de Contato</h3>
               {contactInfo.map((info, index) => (
                 <div key={index} className="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-all duration-300">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-accent-100 text-accent-600 rounded-full mb-4">
-                    <info.icon className="w-6 h-6" />
+                    <info.icon className="w-6 h-6" aria-hidden="true" />
                   </div>
                   <h4 className="font-semibold text-primary-800 mb-2">{info.title}</h4>
                   <p className="text-primary-600 text-sm whitespace-pre-line">{info.content}</p>
@@ -150,6 +154,7 @@ const Contact: React.FC = () => {
 
             {/* Map */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+             <h3 className="sr-only">Mapa de Localização</h3>
               <div className="h-64 bg-primary-100 flex items-center justify-center">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7906567309407!2d-48.50440252406894!3d-1.459678998555916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48c36cd0e5a19%3A0x8d7dd3a6a6b69a94!2sRua%20das%20Flores%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt!2sbr!4v1703070000000!5m2!1spt!2sbr"
@@ -159,12 +164,12 @@ const Contact: React.FC = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização da Sabor da Vila"
+                  title="Localização da Sabor da Vila no Google Maps"
                   className="w-full h-full"
                 />
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>

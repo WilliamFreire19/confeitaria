@@ -67,14 +67,14 @@ const SpecialOffers: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-accent-50 to-warm-100">
+    <section className="py-16 bg-gradient-to-br from-accent-50 to-warm-100" aria-labelledby="special-offers-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
-            Promoções que Aquecem o Coração
+          <h2 id="special-offers-heading" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
+            Ofertas Especiais da Sabor da Vila Confeitaria
           </h2>
           <p className="text-lg text-primary-600 max-w-2xl mx-auto">
-            Ofertas especiais da semana com sabores irresistíveis e preços que cabem no seu bolso
+            Aproveite nossas promoções exclusivas! Deliciosos combos de doces, salgados e bolos artesanais com preços imperdíveis em Belém. Peça já o seu kit festa ou lanche especial.
           </p>
         </div>
 
@@ -82,11 +82,11 @@ const SpecialOffers: React.FC = () => {
           {/* Desktop Grid View */}
           <div className="hidden lg:grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
             {offers.map((offer) => (
-              <div key={offer.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+              <article key={offer.id} aria-labelledby={`offer-title-${offer.id}`} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
                 <div className="relative">
                   <img
                     src={offer.image}
-                    alt={offer.name}
+                    alt={`Oferta especial: ${offer.name} - ${offer.description}`}
                     className="w-full h-48 object-cover"
                   />
                   <div className="absolute top-4 right-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -94,7 +94,7 @@ const SpecialOffers: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="font-serif text-xl font-bold text-primary-800 mb-2">
+                  <h3 id={`offer-title-${offer.id}`} className="font-serif text-xl font-bold text-primary-800 mb-2">
                     {offer.name}
                   </h3>
                   <p className="text-primary-600 mb-4 text-sm">
@@ -114,11 +114,11 @@ const SpecialOffers: React.FC = () => {
                     onClick={() => handleWhatsAppClick(offer)}
                     className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2"
                   >
-                    <ShoppingBag className="w-4 h-4" />
+                    <ShoppingBag className="w-4 h-4" aria-hidden="true" />
                     Pedir Pelo WhatsApp
                   </button>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
 
@@ -130,12 +130,12 @@ const SpecialOffers: React.FC = () => {
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {offers.map((offer) => (
-                  <div key={offer.id} className="w-full flex-shrink-0 px-4">
+                  <article key={offer.id} aria-labelledby={`mobile-offer-title-${offer.id}`} className="w-full flex-shrink-0 px-4">
                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                       <div className="relative">
                         <img
                           src={offer.image}
-                          alt={offer.name}
+                          alt={`Oferta especial mobile: ${offer.name} - ${offer.description}`}
                           className="w-full h-56 object-cover"
                         />
                         <div className="absolute top-4 right-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -143,7 +143,7 @@ const SpecialOffers: React.FC = () => {
                         </div>
                       </div>
                       <div className="p-6">
-                        <h3 className="font-serif text-xl font-bold text-primary-800 mb-2">
+                        <h3 id={`mobile-offer-title-${offer.id}`} className="font-serif text-xl font-bold text-primary-800 mb-2">
                           {offer.name}
                         </h3>
                         <p className="text-primary-600 mb-4">
@@ -163,12 +163,12 @@ const SpecialOffers: React.FC = () => {
                           onClick={() => handleWhatsAppClick(offer)}
                           className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2"
                         >
-                          <ShoppingBag className="w-4 h-4" />
+                          <ShoppingBag className="w-4 h-4" aria-hidden="true" />
                           Pedir Pelo WhatsApp
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
@@ -176,23 +176,28 @@ const SpecialOffers: React.FC = () => {
             {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
+              aria-label="Oferta anterior"
               className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-primary-700 p-2 rounded-full shadow-lg transition-all duration-200"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextSlide}
+              aria-label="Próxima oferta"
               className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-primary-700 p-2 rounded-full shadow-lg transition-all duration-200"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
 
             {/* Dots Indicator */}
-            <div className="flex justify-center mt-6 space-x-2">
+            <div className="flex justify-center mt-6 space-x-2" role="tablist">
               {offers.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
+                  role="tab"
+                  aria-selected={index === currentSlide}
+                  aria-label={`Ir para oferta ${index + 1}`}
                   className={`w-3 h-3 rounded-full transition-colors duration-200 ${
                     index === currentSlide ? 'bg-accent-500' : 'bg-primary-300'
                   }`}

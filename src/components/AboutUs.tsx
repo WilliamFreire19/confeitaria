@@ -26,34 +26,34 @@ const AboutUs: React.FC = () => {
   ];
 
   return (
-    <section id="sobre" className="py-16 bg-gradient-to-br from-warm-50 to-primary-50">
+    <section id="sobre" className="py-16 bg-gradient-to-br from-warm-50 to-primary-50" aria-labelledby="about-us-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
-            Nossa História, Nossa Paixão
+          <h2 id="about-us-heading" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
+            Sabor da Vila: Confeitaria Artesanal com Tradição em Belém
           </h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div className="space-y-6">
+          <article className="space-y-6">
             <div className="space-y-4">
               <p className="text-lg text-primary-700 leading-relaxed">
-                A <span className="font-semibold text-accent-600">Sabor da Vila</span> nasceu do sonho de uma família apaixonada pela confeitaria. Há mais de 15 anos, nossa fundadora Maria começou a fazer doces em casa para amigos e familiares, e o que era apenas um hobby se transformou em uma verdadeira paixão.
+                A <span className="font-semibold text-accent-600">Sabor da Vila Confeitaria</span> nasceu em Belém do Pará, fruto do sonho de uma família apaixonada pela arte de criar doces e salgados artesanais. Há mais de 15 anos, nossa fundadora Maria, com suas receitas caseiras e muito afeto, começou a encantar amigos e familiares. O que era um hobby se transformou em uma confeitaria reconhecida pelo sabor autêntico e qualidade.
               </p>
               <p className="text-lg text-primary-700 leading-relaxed">
-                Com receitas tradicionais passadas de mãe para filha e a vontade de espalhar momentos doces pelo mundo, decidimos abrir nossa confeitaria. Cada produto que sai do nosso forno carrega não apenas sabor, mas também todo o carinho e dedicação que colocamos em nossa arte.
+                Com receitas de família, passadas de geração em geração, e o desejo de compartilhar momentos de felicidade, abrimos as portas da nossa confeitaria. Cada bolo, doce ou salgado que sai do nosso forno artesanal carrega não apenas ingredientes frescos e selecionados, mas também todo o carinho e dedicação que colocamos em nossa arte culinária. Servimos com orgulho a comunidade de Belém.
               </p>
               <p className="text-lg text-primary-700 leading-relaxed">
-                Nossa filosofia é simples: <span className="font-semibold text-accent-600">ingredientes de qualidade superior, produção 100% artesanal e atendimento que faz você se sentir em casa</span>. Porque acreditamos que os melhores momentos da vida merecem os melhores sabores.
+                Nossa filosofia é simples: <span className="font-semibold text-accent-600">ingredientes de qualidade superior, produção 100% artesanal com toque caseiro, e um atendimento que faz você se sentir parte da família Sabor da Vila</span>. Porque acreditamos que os melhores momentos da vida são celebrados com os melhores sabores de doces e salgados.
               </p>
             </div>
-          </div>
+          </article>
           
-          <div className="relative">
+          <aside className="relative">
             <div className="relative overflow-hidden rounded-2xl shadow-xl">
               <img
                 src="https://images.pexels.com/photos/3992134/pexels-photo-3992134.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                alt="Nossa confeitaria"
+                alt="Foto aconchegante do interior da confeitaria Sabor da Vila, mostrando o balcão e área de atendimento"
                 className="w-full h-96 object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -70,7 +70,7 @@ const AboutUs: React.FC = () => {
                 <div className="text-sm">Clientes Felizes</div>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -80,7 +80,7 @@ const AboutUs: React.FC = () => {
               className="text-center p-6 bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-accent-100 text-accent-600 rounded-full mb-4">
-                <value.icon className="w-8 h-8" />
+                <value.icon className="w-8 h-8" aria-hidden="true" />
               </div>
               <h3 className="font-serif text-xl font-bold text-primary-800 mb-2">
                 {value.title}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heart, MapPin, Phone, Mail, Instagram, Facebook } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom'; // Adicionado useNavigate e useLocation
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -12,24 +12,32 @@ const Footer: React.FC = () => {
     { href: '#contato', label: 'Contato' }
   ];
 
+  const navigate = useNavigate(); // Importado de react-router-dom
+  const location = useLocation(); // Importado de react-router-dom
+
   const handleNavClick = (href: string) => {
     if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      if (location.pathname === '/') {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/' + href);
       }
     }
   };
 
   return (
-    <footer className="bg-primary-800 text-white">
+    <footer className="bg-primary-800 text-white" aria-labelledby="footer-heading">
+      <h2 id="footer-heading" className="sr-only">Rodapé</h2>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Slogan */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="relative">
-                <Heart className="w-8 h-8 text-accent-400" fill="currentColor" />
+                <Heart className="w-8 h-8 text-accent-400" fill="currentColor" aria-hidden="true" />
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent-300 rounded-full animate-pulse"></div>
               </div>
               <div>
@@ -47,7 +55,7 @@ const Footer: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 bg-accent-500 hover:bg-accent-600 rounded-full transition-colors duration-300"
-                aria-label="Instagram"
+                aria-label="Siga-nos no Instagram"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -56,7 +64,7 @@ const Footer: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 bg-accent-500 hover:bg-accent-600 rounded-full transition-colors duration-300"
-                aria-label="Facebook"
+                aria-label="Siga-nos no Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -64,8 +72,8 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Navigation Links */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4 text-accent-300">Navegação</h4>
+          <nav aria-labelledby="footer-nav-heading">
+            <h3 id="footer-nav-heading" className="font-semibold text-lg mb-4 text-accent-300">Navegação</h3>
             <ul className="space-y-2">
               {navigationLinks.map((link) => (
                 <li key={link.href}>
@@ -87,21 +95,21 @@ const Footer: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Contact Information */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4 text-accent-300">Contato</h4>
+          <section aria-labelledby="footer-contact-heading">
+            <h3 id="footer-contact-heading" className="font-semibold text-lg mb-4 text-accent-300">Contato</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
-                <MapPin className="w-4 h-4 text-accent-400 mt-0.5 flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-accent-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <span className="text-warm-200 text-sm">
                   Rua das Flores, 123 - Centro<br />
                   Belém, PA - CEP: 66010-020
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone className="w-4 h-4 text-accent-400 flex-shrink-0" />
+                <Phone className="w-4 h-4 text-accent-400 flex-shrink-0" aria-hidden="true" />
                 <a 
                   href="tel:+5591984494962" 
                   className="text-warm-200 hover:text-accent-300 transition-colors duration-300 text-sm"
@@ -110,7 +118,7 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li className="flex items-center space-x-3">
-                <Mail className="w-4 h-4 text-accent-400 flex-shrink-0" />
+                <Mail className="w-4 h-4 text-accent-400 flex-shrink-0" aria-hidden="true" />
                 <a 
                   href="mailto:contato@sabordavila.com.br" 
                   className="text-warm-200 hover:text-accent-300 transition-colors duration-300 text-sm"
@@ -119,11 +127,11 @@ const Footer: React.FC = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </section>
 
           {/* Business Hours */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4 text-accent-300">Horário de Funcionamento</h4>
+          <section aria-labelledby="footer-hours-heading">
+            <h3 id="footer-hours-heading" className="font-semibold text-lg mb-4 text-accent-300">Horário de Funcionamento</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-warm-200">Segunda a Sábado:</span>
@@ -139,7 +147,7 @@ const Footer: React.FC = () => {
                 💡 Encomendas especiais: agende com 48h de antecedência
               </p>
             </div>
-          </div>
+          </section>
         </div>
 
         {/* Bottom Section */}
