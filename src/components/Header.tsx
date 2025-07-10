@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Adicionado useNavigate
 import { Menu, X, Heart } from 'lucide-react';
 
 const Header: React.FC = () => {
@@ -27,12 +27,18 @@ const Header: React.FC = () => {
     { href: '#contato', label: 'Contato' },
   ];
 
+  const navigate = useNavigate(); // Importado de react-router-dom
+
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
-    if (href.startsWith('#') && location.pathname === '/') {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('#')) {
+      if (location.pathname === '/') {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/' + href);
       }
     }
   };

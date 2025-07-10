@@ -80,10 +80,10 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-primary-50">
+    <section className="py-16 bg-primary-50" aria-labelledby="testimonials-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
+          <h2 id="testimonials-heading" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-800 mb-4">
             O que Nossos Clientes Dizem
           </h2>
           <p className="text-lg text-primary-600 max-w-2xl mx-auto">
@@ -95,11 +95,11 @@ const Testimonials: React.FC = () => {
           {/* Desktop View - Show 3 testimonials */}
           <div className="hidden lg:grid lg:grid-cols-3 gap-8">
             {testimonials.slice(0, 3).map((testimonial) => (
-              <div key={testimonial.id} className="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
+              <article key={testimonial.id} className="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <img
                     src={testimonial.avatar}
-                    alt={testimonial.name}
+                    alt={`Foto de perfil de ${testimonial.name}, cliente satisfeito(a)`}
                     className="w-12 h-12 rounded-full object-cover mr-4"
                   />
                   <div>
@@ -107,16 +107,16 @@ const Testimonials: React.FC = () => {
                     <p className="text-sm text-primary-500">{testimonial.location}</p>
                   </div>
                 </div>
-                <div className="flex mb-3">
+                <div className="flex mb-3" aria-label={`Avaliação de ${testimonial.rating} de 5 estrelas`}>
                   {renderStars(testimonial.rating)}
                 </div>
-                <div className="relative">
-                  <Quote className="absolute top-0 left-0 w-6 h-6 text-accent-300 -translate-x-1 -translate-y-1" />
+                <blockquote className="relative">
+                  <Quote className="absolute top-0 left-0 w-6 h-6 text-accent-300 -translate-x-1 -translate-y-1" aria-hidden="true" />
                   <p className="text-primary-700 italic pl-4 leading-relaxed">
                     "{testimonial.text}"
                   </p>
-                </div>
-              </div>
+                </blockquote>
+              </article>
             ))}
           </div>
 
@@ -128,12 +128,12 @@ const Testimonials: React.FC = () => {
                 style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
               >
                 {testimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                  <article key={testimonial.id} className="w-full flex-shrink-0 px-4">
                     <div className="bg-white rounded-2xl shadow-lg p-6 mx-auto max-w-md">
                       <div className="flex items-center mb-4">
                         <img
                           src={testimonial.avatar}
-                          alt={testimonial.name}
+                          alt={`Foto de perfil de ${testimonial.name}, cliente satisfeito(a) (versão mobile)`}
                           className="w-12 h-12 rounded-full object-cover mr-4"
                         />
                         <div>
@@ -141,17 +141,17 @@ const Testimonials: React.FC = () => {
                           <p className="text-sm text-primary-500">{testimonial.location}</p>
                         </div>
                       </div>
-                      <div className="flex mb-3">
+                      <div className="flex mb-3" aria-label={`Avaliação de ${testimonial.rating} de 5 estrelas`}>
                         {renderStars(testimonial.rating)}
                       </div>
-                      <div className="relative">
-                        <Quote className="absolute top-0 left-0 w-6 h-6 text-accent-300 -translate-x-1 -translate-y-1" />
+                      <blockquote className="relative">
+                        <Quote className="absolute top-0 left-0 w-6 h-6 text-accent-300 -translate-x-1 -translate-y-1" aria-hidden="true" />
                         <p className="text-primary-700 italic pl-4 leading-relaxed">
                           "{testimonial.text}"
                         </p>
-                      </div>
+                      </blockquote>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
@@ -159,23 +159,28 @@ const Testimonials: React.FC = () => {
             {/* Navigation Buttons */}
             <button
               onClick={prevTestimonial}
+              aria-label="Depoimento anterior"
               className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-primary-700 p-2 rounded-full shadow-lg transition-all duration-200"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextTestimonial}
+              aria-label="Próximo depoimento"
               className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-primary-700 p-2 rounded-full shadow-lg transition-all duration-200"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
 
             {/* Dots Indicator */}
-            <div className="flex justify-center mt-6 space-x-2">
+            <div className="flex justify-center mt-6 space-x-2" role="tablist">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToTestimonial(index)}
+                  role="tab"
+                  aria-selected={index === currentTestimonial}
+                  aria-label={`Ir para depoimento ${index + 1}`}
                   className={`w-3 h-3 rounded-full transition-colors duration-200 ${
                     index === currentTestimonial ? 'bg-accent-500' : 'bg-primary-300'
                   }`}
@@ -187,11 +192,11 @@ const Testimonials: React.FC = () => {
           {/* Show remaining testimonials on desktop */}
           <div className="hidden lg:grid lg:grid-cols-2 gap-8 mt-8">
             {testimonials.slice(3).map((testimonial) => (
-              <div key={testimonial.id} className="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
+              <article key={testimonial.id} className="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <img
                     src={testimonial.avatar}
-                    alt={testimonial.name}
+                    alt={`Foto de perfil de ${testimonial.name}, cliente satisfeito(a) (desktop)`}
                     className="w-12 h-12 rounded-full object-cover mr-4"
                   />
                   <div>
@@ -199,16 +204,16 @@ const Testimonials: React.FC = () => {
                     <p className="text-sm text-primary-500">{testimonial.location}</p>
                   </div>
                 </div>
-                <div className="flex mb-3">
+                <div className="flex mb-3" aria-label={`Avaliação de ${testimonial.rating} de 5 estrelas`}>
                   {renderStars(testimonial.rating)}
                 </div>
-                <div className="relative">
-                  <Quote className="absolute top-0 left-0 w-6 h-6 text-accent-300 -translate-x-1 -translate-y-1" />
+                <blockquote className="relative">
+                  <Quote className="absolute top-0 left-0 w-6 h-6 text-accent-300 -translate-x-1 -translate-y-1" aria-hidden="true" />
                   <p className="text-primary-700 italic pl-4 leading-relaxed">
                     "{testimonial.text}"
                   </p>
-                </div>
-              </div>
+                </blockquote>
+              </article>
             ))}
           </div>
         </div>
